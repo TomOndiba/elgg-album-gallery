@@ -9,7 +9,7 @@
  *
  * @return array
  */
-function gallery_get_page_content_add()
+function album_gallery_get_page_content_add()
 {
     elgg_load_library('elgg:file');
     $vars = array('enctype' => 'multipart/form-data');
@@ -30,7 +30,7 @@ function gallery_get_page_content_add()
  *
  * @return  array
  */
-function gallery_get_page_content_all()
+function album_gallery_get_page_content_all()
 {
     //Take entities from user
     $entita = elgg_get_entities(array('types' => array('object'),
@@ -61,7 +61,7 @@ function gallery_get_page_content_all()
  *
  * @return  array
  */
-function gallery_get_page_content_show($GUID)
+function album_gallery_get_page_content_show($GUID)
 {
     if(!$GUID || !$img = get_entity($GUID))
     {
@@ -81,7 +81,24 @@ function gallery_get_page_content_show($GUID)
     return $return;
 }
 
-function gallery_get_page_content_delete($GUID)
+function album_gallery_get_page_content_delete($GUID)
+{
+    if(!$GUID || !$img = get_entity($GUID))
+    {
+        $immagine = elgg_view('elgg-album-gallery/error', array('error' => elgg_echo('gallery:no:imageshow')));
+        $titolo = elgg_echo('gallery:title:error',array(elgg_echo('gallery:no:imageshow')));
+    }
+    else
+    {
+        //Delete image
+        $img->delete();
+        $message = elgg_echo("gallery:delete:img");
+        system_message($message);
+        forward("elgg-album-gallery/all");
+    }
+}
+
+function album_gallery_get_page_content_album($GUID)
 {
     if(!$GUID || !$img = get_entity($GUID))
     {

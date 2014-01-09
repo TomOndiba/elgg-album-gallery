@@ -1,20 +1,20 @@
 <?php
 /**
- * Add Image Form
+ * Add Album Form
  */
 ?>
 <div>
-    <label for="image_title">Image Title</label>
-    <?php echo elgg_view('input/text', array('name' => 'img_title')); ?>
+    <label for="image_title">Album Title</label>
+    <?php echo elgg_view('input/text', array('name' => 'album_title')); ?>
 </div>
 
 <div>
-    <label for="image_description">Description</label>
-    <?php echo elgg_view('input/longtext',array('name' => 'img_descr')); ?>
+    <label for="image_description">Album Description</label>
+    <?php echo elgg_view('input/longtext',array('name' => 'album_descr')); ?>
 </div>
 <div>
-    <label for="image_upload">Image upload</label>
-    <?php echo elgg_view('input/file', array('name' => 'img_upload')); ?>
+    <label for="image_upload">Images upload</label>
+    <?php echo elgg_view('input/file', array('name' => 'img_upload[]', 'multiple' => 'multiple')); ?>
 </div>
 <?php
 echo elgg_view('input/hidden', array('name' => 'container_guid',
@@ -22,6 +22,6 @@ echo elgg_view('input/hidden', array('name' => 'container_guid',
     ));
 echo elgg_view('input/submit', array(
     'name' => 'uppa',
-    'value' => 'Upload Image'
+    'value' => 'Create Album'
 ));
 ?>

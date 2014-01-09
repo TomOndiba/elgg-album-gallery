@@ -42,10 +42,12 @@ function album_gallery_init()
 /**
  * Dispatches album-gallery pages.
  * URLs take the form of
- *  All images of user:       elgg-album-gallery/all
- *  Gallery Image:            elgg-album-gallery/view/<guid>
- *  New image:                elgg-album-gallery/add
- *  Delete image:             elgg-album-gallery/delete/<guid>
+ *  All albums of user:       elgg-album-gallery/all
+ *  Album images view:     elgg-album-gallery/<guid>
+ *  Gallery Image:              elgg-album-gallery/view/<guid>
+ *  New Album:                 elgg-album-gallery/add
+ *  Delete Album:              elgg-album-gallery/delete/<guid>
+ *  Delete image:               elgg-album-gallery/delete/image/<guid>
  */
 function album_gallery_page_handler($page)
 {
@@ -58,21 +60,25 @@ function album_gallery_page_handler($page)
   switch($page_type)
   {
     case 'view':
-      $params = gallery_get_page_content_show($page[1]);
+      $params = album_gallery_get_page_content_show($page[1]);
       break;
     case 'add':
       gatekeeper();
-      $params = gallery_get_page_content_add();
+      $params = album_gallery_get_page_content_add();
       break;
     case 'delete':
       gatekeeper();
-      $params = gallery_get_page_content_delete($page[1]);
+      if($page[1] == "image")
+        $params = album_gallery_get_page_content_delete($page[2]);
+      else
+        $params = album_gallery_get_page_content_delete($page[1]);
       break;
     case 'all':
-      $params = gallery_get_page_content_all();
+      $params = album_gallery_get_page_content_all();
       break;
     default:
-      return false;
+      $params = album_gallery_get_page_content_album($page[0]);
+      break;
   }
 
   $body = elgg_view_layout('content', $params);
