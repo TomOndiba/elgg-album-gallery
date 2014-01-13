@@ -34,18 +34,18 @@ function album_gallery_get_page_content_all()
 {
     //Take entities from user
     $entita = elgg_get_entities(array('types' => array('object'),
-                                      'subtypes' => array('file'),
+                                      'subtypes' => array('album-gallery'),
                                       'owner_guid' => elgg_get_logged_in_user_guid(),
                                       'limit' => 0,
-                                      'order_by' => 'time_created asc'
+                                      'order_by' => 'e.time_created asc'
                                 ));
-
     if(count($entita) > 0)
         foreach ($entita as $key)
-            $immagine .= elgg_view('elgg-album-gallery/all',array('title' => $key['title'],
-                                                            'icon' => $key->getIconURL('medium'),
-                                                            'img_guid' => $key['guid']
-                                                            ));
+            $immagine .= elgg_view('elgg-album-gallery/all',array(
+              'title' => $key->title,
+              'descr' => $key->description,
+              'album_guid' => $key->guid
+            ));
     else
         $immagine = elgg_view('elgg-album-gallery/error', array('error' => elgg_echo('gallery:no:imagegallery')));
 
@@ -100,17 +100,30 @@ function album_gallery_get_page_content_delete($GUID)
 
 function album_gallery_get_page_content_album($GUID)
 {
-    if(!$GUID || !$img = get_entity($GUID))
+    if(!$GUID)
     {
         $immagine = elgg_view('elgg-album-gallery/error', array('error' => elgg_echo('gallery:no:imageshow')));
         $titolo = elgg_echo('gallery:title:error',array(elgg_echo('gallery:no:imageshow')));
     }
     else
     {
-        //Delete image
-        $img->delete();
-        $message = elgg_echo("gallery:delete:img");
-        system_message($message);
-        forward("elgg-album-gallery/all");
+      $entita = elgg_get_entities_from_relationship(array(
+        'relationship' => 'in_album',
+        'relationship_guid' => $GUID,
+        'inverse_relationship' => true,
+        'limit' => 0
+        ));
+
+
+      foreach ($entita as $key)
+          $immagine .= elgg_view('elgg-album-gallery/album',array(
+            'title' => $key->title,
+            'icon' => $key->getIconURL('medium'),
+            'img_guid' => $key->guid
+          ));
     }
+    $return = array(
+      'title' => elgg_echo('gallery:title:showall'),
+      'content' => $immagine);
+    return $return;
 }

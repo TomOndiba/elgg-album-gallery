@@ -12,9 +12,15 @@
 }
 
 /* Gallery Style in elgg-album-gallery/all */
-.gallery {
+.gallery-all {
     float: left;
     padding: 10px 10px 10px 10px;
+    width: 100px;
+    border: 1px solid black;
+}
+
+.descr-all {
+  border: 1px solid green;
 }
 
 /* Show Style in elgg-album-gallery/view */

@@ -33,7 +33,7 @@ function album_gallery_init()
 
   // register actions
   $action_path = elgg_get_plugins_path() . 'elgg-album-gallery/actions/elgg-album-gallery';
-  //Image Upload
+  //Image Upload and Album Create
   elgg_register_action('elgg-album-gallery/uppa', "$action_path/uppa.php");
   //Delete Image
   elgg_register_action('elgg-album-gallery/delete', "$action_path/delete.php");
@@ -43,7 +43,7 @@ function album_gallery_init()
  * Dispatches album-gallery pages.
  * URLs take the form of
  *  All albums of user:       elgg-album-gallery/all
- *  Album images view:     elgg-album-gallery/<guid>
+ *  Album images view:     elgg-album-gallery/album/<guid>
  *  Gallery Image:              elgg-album-gallery/view/<guid>
  *  New Album:                 elgg-album-gallery/add
  *  Delete Album:              elgg-album-gallery/delete/<guid>
@@ -76,9 +76,11 @@ function album_gallery_page_handler($page)
     case 'all':
       $params = album_gallery_get_page_content_all();
       break;
-    default:
-      $params = album_gallery_get_page_content_album($page[0]);
+    case 'album':
+      $params = album_gallery_get_page_content_album($page[1]);
       break;
+    default:
+      return false;
   }
 
   $body = elgg_view_layout('content', $params);

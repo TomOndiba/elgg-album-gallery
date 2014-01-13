@@ -1,4 +1,4 @@
-<div class="gallery">
-    <h3 class="titolino"><?php echo $vars['title'];?></h3>
-     <a href="/elgg-album-gallery/view/<?php echo $vars['img_guid']; ?>"><img src="<?php echo$vars['icon'];?>"/></a>
+<div class="gallery-all">
+    <h3 class="titolino-all"><a href="/elgg-album-gallery/album/<?php echo $vars['album_guid']; ?>"><?php echo $vars['title'];?></a></h3>
+    <p class="descr-all"><?php echo $vars['descr']; ?></p>
 </div>

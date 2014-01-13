@@ -8,8 +8,8 @@ $italiano = array(
     'gallery:no:imageshow' => 'Nessuna immagine da visualizzare!',
     'gallery:no:imagegallery' => 'Nessuna immagine nella tua galleria!',
     // Title
-    'gallery:title:add' => 'Aggiungi Immagine',
-    'gallery:title:showall' => 'Tutte le tue immagini',
+    'gallery:title:add' => 'Aggiungi Album',
+    'gallery:title:showall' => 'Tutti i tuoi Album',
     'gallery:title:showone' => 'Visualizza immagine - ',
     'gallery:title:error' => "Errore: %s",
     // Status

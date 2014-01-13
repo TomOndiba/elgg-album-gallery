@@ -8,8 +8,8 @@ $english = array(
     'gallery:no:imageshow' => 'No image to show!',
     'gallery:no:imagegallery' => 'No images in your gallery!',
     // Title
-    'gallery:title:add' => 'Add Image',
-    'gallery:title:showall' => 'All images',
+    'gallery:title:add' => 'Add Album',
+    'gallery:title:showall' => 'All Albums',
     'gallery:title:showone' => "Show Image - %s",
     'gallery:title:error' => "Error: %s",
     //Status
