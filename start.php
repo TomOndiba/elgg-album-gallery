@@ -44,7 +44,7 @@ function album_gallery_init()
  * URLs take the form of
  *  All albums of user:       elgg-album-gallery/all
  *  Album images view:     elgg-album-gallery/album/<guid>
- *  Gallery Image:              elgg-album-gallery/view/<guid>
+ *  Gallery Image:              elgg-album-gallery/show/<guid>
  *  New Album:                 elgg-album-gallery/add
  *  Delete Album:              elgg-album-gallery/delete/<guid>
  *  Delete image:               elgg-album-gallery/delete/image/<guid>
@@ -59,7 +59,7 @@ function album_gallery_page_handler($page)
   $page_type = $page[0];
   switch($page_type)
   {
-    case 'view':
+    case 'show':
       $params = album_gallery_get_page_content_show($page[1]);
       break;
     case 'add':

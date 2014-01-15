@@ -54,8 +54,14 @@
     background-color: #e74c3c;
     width: 100px;
     font-weight: bold;
+    clear: both;
 }
 
 .del:link {
     color: #2c3e50;
+}
+
+.gallery-album {
+    float: left;
+    padding: 10px 10px 10px 10px;
 }

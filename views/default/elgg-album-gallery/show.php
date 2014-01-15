@@ -10,5 +10,5 @@
     <div class="description"><p class="desc"><?php echo $vars['desc']; ?></p></div>
 </div>
 <div class="action">
-    <a class="del" href="/elgg-album-gallery/delete/<?php echo $vars['guid'];?>"><?php echo $vars['action']; ?></a>
+    <a class="del" href="/elgg-album-gallery/delete/image/<?php echo $vars['guid'];?>"><?php echo $vars['action']; ?></a>
 </div>

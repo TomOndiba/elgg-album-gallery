@@ -24,14 +24,15 @@ if($album_guid)
     {
       $name_file = htmlspecialchars($image['name'][$i], ENT_QUOTES, 'UTF-8');
       //Make a file
-      $file = new FilePluginFile();
-      $file->subtype = "album_image";
+      $file = new ElggFile();
+      //This MUST to be "file" for file type
+      $file->subtype = "file";
       $file->title = $name_file;
       $file->description = $name_file;
       $file->access_id = ACCESS_PUBLIC;
       $file->owner_guid = $owner;
       //Generate filename
-      $prefix = "album_image/";
+      $prefix = "file/";
       $filestorename = elgg_strtolower(time().$image['name'][$i]);
       $file->setFilename($prefix . $filestorename);
       //Set Mimetype
@@ -90,14 +91,14 @@ if($album_guid)
         }
       }
       if ($file_guid)
-        add_entity_relationship($file_guid,'in_album',$album_guid);
+        add_entity_relationship($file->guid,'in_album',$album_guid);
     }
   }
-  system_message("Album Creato con successo!");
+  system_message("Album Created Successfull!");
   forward("elgg-album-gallery/album/".$album_guid);
 }
 else
 {
-  system_message("Impossibile creare l'album!");
+  system_message("Something wrong!");
   forward("elgg-album-gallery/add");
 }
