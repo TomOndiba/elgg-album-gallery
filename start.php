@@ -55,8 +55,16 @@ function album_gallery_page_handler($page)
 
   if(!isset($page[0]))
     $page[0] = elgg_get_logged_in_user_guid();
+
+  if($page[0] == "add")
+  {
+    $page[0] = elgg_get_logged_in_user_guid();
+    $page[1] = "add";
+  }
+
   if(!isset($page[1]))
     $page[1] = 'all';
+
 
   $page_type = $page[1];
   switch($page_type)
