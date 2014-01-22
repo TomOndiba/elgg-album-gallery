@@ -16,11 +16,17 @@ function album_gallery_init()
   elgg_register_library('elgg:album_gallery', elgg_get_plugins_path().'elgg-album-gallery/lib/elgg-album-gallery.php');
 
   // Site navigation
-  $item = new ElggMenuItem('elgg-album-gallery', 'Album Gallery', 'elgg-album-gallery/'.elgg_get_logged_in_user_guid().'/all');
+  $item = new ElggMenuItem('elgg-album-gallery-menu', 'Album Gallery', 'elgg-album-gallery/'.elgg_get_logged_in_user_guid().'/all');
+  $item2 = new ElggMenuItem('elgg-album-gallery-add-menu', 'Add Album', 'elgg-album-gallery/'.elgg_get_logged_in_user_guid().'/add');
+
+  $item->addChild($item2);
   elgg_register_menu_item('site', $item);
 
   //Add custom CSS
   elgg_extend_view('css/elgg', 'elgg-album-gallery/css');
+
+  // add elgg-album-gallery link to owner_block
+  elgg_register_plugin_hook_handler('register', 'menu:owner_block', 'gallery_album_owner_block_menu');
 
   /* Add some js files
     $gallery_js = elgg_get_simplecache_url('js', 'elgg-album-gallery/<name_file>');
@@ -28,7 +34,7 @@ function album_gallery_init()
     elgg_register_js('elgg.mygallery',$gallery_js);
   */
 
-	// routing of urls
+  // routing of urls
   elgg_register_page_handler('elgg-album-gallery', 'album_gallery_page_handler');
 
   // register actions
@@ -98,3 +104,15 @@ function album_gallery_page_handler($page)
   echo elgg_view_page($params['title'], $body);
   return true;
 }
+
+/**
+* Add a menu item to an ownerblock
+*/
+function gallery_album_owner_block_menu($hook, $type, $return, $params)
+{
+  $url = "elgg-album-gallery/{$params['entity']->guid}/all";
+  $item = new ElggMenuItem('elgg-album-gallery-menu-owner', "Album-Gallery", $url);
+  $return[] = $item;
+  return $return;
+}
+
