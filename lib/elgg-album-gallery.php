@@ -47,8 +47,8 @@ function album_gallery_get_page_content_all($GUID_USER)
 {
     //Take entities from user
     $entita = elgg_get_entities(array(
-      'types' => array('object'),
-      'subtypes' => array('album-gallery'),
+      'types' => 'object',
+      'subtypes' => 'album-gallery',
       'owner_guid' => $GUID_USER,
       'limit' => 0,
       'order_by' => 'e.time_created asc'
