@@ -95,7 +95,7 @@ if($album_guid)
     }
   }
   system_message("Album Created Successfull!");
-  forward("elgg-album-gallery/album/".$album_guid);
+  forward("elgg-album-gallery/$owner/album/".$album_guid);
 }
 else
 {
