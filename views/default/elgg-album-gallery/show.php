@@ -12,6 +12,6 @@
 <?php
 if($vars['guid_user'] == elgg_get_logged_in_user_guid()){?>
 <div class="action">
-    <a class="del" href="/elgg-album-gallery/<?php echo $vars['guid_user']; ?>/delete/image/<?php echo $vars['guid'];?>"><?php echo $vars['action']; ?></a>
+    <a class="del" href="<?php echo elgg_get_site_url().'elgg-album-gallery/'.$vars['guid_user'].'/delete/image/'.$vars['guid'];?>"><?php echo $vars['action']; ?></a>
 </div>
 <?php } ?>
